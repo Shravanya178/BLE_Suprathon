@@ -1,0 +1,2 @@
+export const CHUNK_SIZE = 100 * 1024;
+export const APP_UUID = '00001101-0000-1000-8000-00805F9B34FB';
