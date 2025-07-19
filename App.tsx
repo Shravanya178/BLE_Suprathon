@@ -1,28 +1,44 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
+ * Bluetooth Chat App - MVP 1
+ * Peer-to-Peer Offline Chat via Bluetooth
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {StatusBar} from 'react-native';
+import DeviceListScreen from './src/components/DeviceListScreen';
+import ChatScreen from './src/components/ChatScreen';
+import {NavigationParamList} from './src/types';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+const Stack = createStackNavigator<NavigationParamList>();
 
+function App(): React.JSX.Element {
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+    <NavigationContainer>
+      <StatusBar barStyle="dark-content" />
+      <Stack.Navigator
+        initialRouteName="DeviceList"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen
+          name="DeviceList"
+          component={DeviceListScreen}
+          options={{
+            title: 'Bluetooth Chat',
+          }}
+        />
+        <Stack.Screen
+          name="Chat"
+          component={ChatScreen}
+          options={{
+            title: 'Chat',
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
